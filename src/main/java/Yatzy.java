@@ -18,14 +18,13 @@ public class Yatzy {
         return total;
     }
 
-    public static int allDiceHaveSameValue(int... dice) {
-        int[] counts = new int[6];
-        for (int die : dice)
-            counts[die - 1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
-                return 50;
-        return 0;
+    public int allDiceHaveSameValue() {
+        for (int i = 0; i < roll.length - 1; i++)
+            if (roll[i] == roll[i + 1])
+                continue;
+            else return 0;
+        return 50;
+
     }
 
     public int threeOfAKind() {

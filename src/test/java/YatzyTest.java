@@ -12,9 +12,9 @@ public class YatzyTest {
 
     @Test
     public void yatzy_scores_50() {
-        assertEquals(50, Yatzy.allDiceHaveSameValue(4, 4, 4, 4, 4));
-        assertEquals(50, Yatzy.allDiceHaveSameValue(6, 6, 6, 6, 6));
-        assertEquals(0, Yatzy.allDiceHaveSameValue(6, 6, 6, 6, 3));
+        assertEquals(50, new Yatzy(4, 4, 4, 4, 4).allDiceHaveSameValue());
+        assertEquals(50, new Yatzy(6, 6, 6, 6, 6).allDiceHaveSameValue());
+        assertEquals(0, new Yatzy(6, 6, 6, 6, 3).allDiceHaveSameValue());
     }
 
     @Test
