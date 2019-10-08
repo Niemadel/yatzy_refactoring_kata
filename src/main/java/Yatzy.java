@@ -31,26 +31,41 @@ public class Yatzy {
         return 0;
     }
 
-    public static int ones(int d1, int d2, int d3, int d4, int d5) {
-        return sumDice(d2, d1, d3, d4, d5, 1);
+    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
+        int[] counts = new int[6];
+        counts[d1 - 1]++;
+        counts[d2 - 1]++;
+        counts[d3 - 1]++;
+        counts[d4 - 1]++;
+        counts[d5 - 1]++;
+        for (int i = 0; i < 6; i++)
+            if (counts[i] >= 3)
+                return (i + 1) * 3;
+        return 0;
     }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        return sumDice(d1, d2, d3, d4, d5, 2);
+    public int ones() {
+        return sumDice(1);
     }
 
-    public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        return sumDice(d1, d2, d3, d4, d5, 3);
+    public int twos() {
+        return sumDice(2);
     }
 
-    private static int sumDice(int d1, int d2, int d3, int d4, int d5, int diceValue) {
-        int sum = 0;
-        if (d1 == diceValue) sum += diceValue;
-        if (d2 == diceValue) sum += diceValue;
-        if (d3 == diceValue) sum += diceValue;
-        if (d4 == diceValue) sum += diceValue;
-        if (d5 == diceValue) sum += diceValue;
-        return sum;
+    public int threes() {
+        return sumDice(3);
+    }
+
+    public int fours() {
+        return sumDice(4);
+    }
+
+    public int fives() {
+        return sumDice(5);
+    }
+
+    public int sixes() {
+        return sumDice(6);
     }
 
     public static int onePair(int d1, int d2, int d3, int d4, int d5) {
@@ -80,17 +95,6 @@ public class Yatzy {
         return 0;
     }
 
-    public int fours() {
-        return sumDice2(4);
-    }
-
-    public int fives() {
-        return sumDice2(5);
-    }
-
-    public int sixes() {
-        return sumDice2(6);
-    }
 
     public static int twoPair(int d1, int d2, int d3, int d4, int d5) {
         int[] counts = new int[6];
@@ -112,26 +116,12 @@ public class Yatzy {
             return 0;
     }
 
-    private int sumDice2(int diceValue) {
+    private int sumDice(int diceValue) {
         int sum = 0;
         for (int aDice : dice)
             if (aDice == diceValue)
                 sum = sum + diceValue;
         return sum;
-    }
-
-    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
-        int[] t;
-        t = new int[6];
-        t[d1 - 1]++;
-        t[d2 - 1]++;
-        t[d3 - 1]++;
-        t[d4 - 1]++;
-        t[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (t[i] >= 3)
-                return (i + 1) * 3;
-        return 0;
     }
 
     public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
