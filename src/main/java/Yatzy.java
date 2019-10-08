@@ -12,12 +12,7 @@ public class Yatzy {
     }
 
     public static int chance(int d1, int d2, int d3, int d4, int d5) {
-        int total = 0;
-        total += d1;
-        total += d2;
-        total += d3;
-        total += d4;
-        total += d5;
+        int total = d1 + d2 + d3 + d4 + d5;
         return total;
     }
 
@@ -45,27 +40,27 @@ public class Yatzy {
     }
 
     public int ones() {
-        return sumDice(1);
+        return sumDiceWithSameValue(1);
     }
 
     public int twos() {
-        return sumDice(2);
+        return sumDiceWithSameValue(2);
     }
 
     public int threes() {
-        return sumDice(3);
+        return sumDiceWithSameValue(3);
     }
 
     public int fours() {
-        return sumDice(4);
+        return sumDiceWithSameValue(4);
     }
 
     public int fives() {
-        return sumDice(5);
+        return sumDiceWithSameValue(5);
     }
 
     public int sixes() {
-        return sumDice(6);
+        return sumDiceWithSameValue(6);
     }
 
     public static int onePair(int d1, int d2, int d3, int d4, int d5) {
@@ -95,7 +90,6 @@ public class Yatzy {
         return 0;
     }
 
-
     public static int twoPair(int d1, int d2, int d3, int d4, int d5) {
         int[] counts = new int[6];
         counts[d1 - 1]++;
@@ -116,11 +110,11 @@ public class Yatzy {
             return 0;
     }
 
-    private int sumDice(int diceValue) {
+    private int sumDiceWithSameValue(int diceValue) {
         int sum = 0;
         for (int aDice : dice)
             if (aDice == diceValue)
-                sum = sum + diceValue;
+                sum += diceValue;
         return sum;
     }
 
@@ -165,7 +159,6 @@ public class Yatzy {
         int _2_at = 0;
         boolean _3 = false;
         int _3_at = 0;
-
 
         tallies = new int[6];
         tallies[d1 - 1] += 1;
