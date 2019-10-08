@@ -1,14 +1,14 @@
 public class Yatzy {
 
-    protected int[] dice;
+    private int[] roll;
 
     public Yatzy(int d1, int d2, int d3, int d4, int d5) {
-        dice = new int[5];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = d5;
+        roll = new int[5];
+        roll[0] = d1;
+        roll[1] = d2;
+        roll[2] = d3;
+        roll[3] = d4;
+        roll[4] = d5;
     }
 
     public static int chance(int d1, int d2, int d3, int d4, int d5) {
@@ -26,8 +26,8 @@ public class Yatzy {
         return 0;
     }
 
-    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = diceValueCounter(d1, d2, d3, d4, d5);
+    public int threeOfAKind() {
+        int[] tallies = diceValueCounter(roll);
 
         for (int i = 0; i < 6; i++)
             if (tallies[i] >= 3)
@@ -35,13 +35,10 @@ public class Yatzy {
         return 0;
     }
 
-    private static int[] diceValueCounter(int d1, int d2, int d3, int d4, int d5) {
+    private int[] diceValueCounter(int[] roll) {
         int[] tallies = new int[6];
-        tallies[d1 - 1]++;
-        tallies[d2 - 1]++;
-        tallies[d3 - 1]++;
-        tallies[d4 - 1]++;
-        tallies[d5 - 1]++;
+        for (int dice : roll)
+            tallies[dice - 1]++;
         return tallies;
     }
 
@@ -69,25 +66,24 @@ public class Yatzy {
         return sumDiceWithSameValue(6);
     }
 
-    public static int onePair(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = diceValueCounter(d1, d2, d3, d4, d5);
-
+    public int onePair() {
+        int[] tallies = diceValueCounter(roll);
         for (int i = 0; i != 6; i++)
             if (tallies[6 - i - 1] >= 2)
                 return (6 - i) * 2;
         return 0;
     }
 
-    public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = diceValueCounter(d1, d2, d3, d4, d5);
+    public int fourOfAKind() {
+        int[] tallies = diceValueCounter(roll);
         for (int i = 0; i < 6; i++)
             if (tallies[i] >= 4)
                 return (i + 1) * 4;
         return 0;
     }
 
-    public static int twoPair(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = diceValueCounter(d1, d2, d3, d4, d5);
+    public int twoPair() {
+        int[] tallies = diceValueCounter(roll);
         int n = 0;
         int score = 0;
         for (int i = 0; i < 6; i += 1)
@@ -103,15 +99,14 @@ public class Yatzy {
 
     private int sumDiceWithSameValue(int diceValue) {
         int sum = 0;
-        for (int aDice : dice)
-            if (aDice == diceValue)
+        for (int dice : roll)
+            if (dice == diceValue)
                 sum += diceValue;
         return sum;
     }
 
-    public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = diceValueCounter(d1, d2, d3, d4, d5);
-
+    public int smallStraight() {
+        int[] tallies = diceValueCounter(roll);
         if (tallies[0] == 1 &&
                 tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -121,8 +116,8 @@ public class Yatzy {
         return 0;
     }
 
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = diceValueCounter(d1, d2, d3, d4, d5);
+    public int largeStraight() {
+        int[] tallies = diceValueCounter(roll);
 
         if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -133,14 +128,14 @@ public class Yatzy {
         return 0;
     }
 
-    public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
+    public int fullHouse() {
         boolean _2 = false;
         int i;
         int _2_at = 0;
         boolean _3 = false;
         int _3_at = 0;
 
-        int[] tallies = diceValueCounter(d1, d2, d3, d4, d5);
+        int[] tallies = diceValueCounter(roll);
 
         for (i = 0; i != 6; i += 1)
             if (tallies[i] == 2) {
