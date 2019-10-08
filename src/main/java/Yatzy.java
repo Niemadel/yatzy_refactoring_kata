@@ -11,8 +11,10 @@ public class Yatzy {
         roll[4] = d5;
     }
 
-    public static int chance(int d1, int d2, int d3, int d4, int d5) {
-        int total = d1 + d2 + d3 + d4 + d5;
+    public int chance() {
+        int total = 0;
+        for (int dice : roll)
+            total += dice;
         return total;
     }
 
