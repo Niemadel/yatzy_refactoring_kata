@@ -1,5 +1,6 @@
 public class Yatzy {
 
+    public static final int TOTAL_DICE_FACES = 6;
     private int[] roll;
 
     public Yatzy(int d1, int d2, int d3, int d4, int d5) {
@@ -20,24 +21,14 @@ public class Yatzy {
 
     public int allDiceHaveSameValue() {
         for (int i = 0; i < roll.length - 1; i++)
-            if (roll[i] == roll[i + 1])
-                continue;
-            else return 0;
+            if (roll[i] != roll[i + 1]) {
+                return 0;
+            }
         return 50;
-
-    }
-
-    public int threeOfAKind() {
-        int[] tallies = diceValueCounter(roll);
-
-        for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 3)
-                return (i + 1) * 3;
-        return 0;
     }
 
     private int[] diceValueCounter(int[] roll) {
-        int[] tallies = new int[6];
+        int[] tallies = new int[TOTAL_DICE_FACES];
         for (int dice : roll)
             tallies[dice - 1]++;
         return tallies;
@@ -69,33 +60,48 @@ public class Yatzy {
 
     public int onePair() {
         int[] tallies = diceValueCounter(roll);
-        for (int i = 0; i != 6; i++)
-            if (tallies[6 - i - 1] >= 2)
-                return (6 - i) * 2;
+        for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
+            if (tallies[diceValue - 1] >= 2)
+                return (diceValue) * 2;
+        return 0;
+    }
+
+    private boolean isPair(int[] tallies) {
+        for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
+            if (tallies[diceValue - 1] >= 2)
+                return true;
+        return false;
+    }
+
+    public int twoPair() {
+        int[] tallies = diceValueCounter(roll);
+        int numberOfPair = 0;
+        int score = 0;
+        for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
+            if (tallies[diceValue - 1] >= 2) {
+                numberOfPair++;
+                score += diceValue;
+            }
+        if (numberOfPair == 2)
+            return score * 2;
+        else
+            return 0;
+    }
+
+    public int threeOfAKind() {
+        int[] tallies = diceValueCounter(roll);
+        for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
+            if (tallies[diceValue - 1] >= 3)
+                return (diceValue) * 3;
         return 0;
     }
 
     public int fourOfAKind() {
         int[] tallies = diceValueCounter(roll);
-        for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 4)
-                return (i + 1) * 4;
+        for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
+            if (tallies[diceValue - 1] >= 4)
+                return (diceValue) * 4;
         return 0;
-    }
-
-    public int twoPair() {
-        int[] tallies = diceValueCounter(roll);
-        int n = 0;
-        int score = 0;
-        for (int i = 0; i < 6; i += 1)
-            if (tallies[6 - i - 1] >= 2) {
-                n++;
-                score += (6 - i);
-            }
-        if (n == 2)
-            return score * 2;
-        else
-            return 0;
     }
 
     private int sumDiceWithSameValue(int diceValue) {
@@ -138,13 +144,13 @@ public class Yatzy {
 
         int[] tallies = diceValueCounter(roll);
 
-        for (i = 0; i != 6; i += 1)
+        for (i = 0; i < TOTAL_DICE_FACES; i++)
             if (tallies[i] == 2) {
                 _2 = true;
                 _2_at = i + 1;
             }
 
-        for (i = 0; i != 6; i += 1)
+        for (i = 0; i < TOTAL_DICE_FACES; i++)
             if (tallies[i] == 3) {
                 _3 = true;
                 _3_at = i + 1;
