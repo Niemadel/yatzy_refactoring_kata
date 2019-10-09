@@ -13,6 +13,10 @@ public class Yatzy {
     }
 
     public int chance() {
+        return sumDiceValue();
+    }
+
+    private int sumDiceValue() {
         int total = 0;
         for (int dice : roll)
             total += dice;
@@ -91,6 +95,7 @@ public class Yatzy {
     public int threeOfAKind() {
         int[] tallies = diceValueCounter(roll);
         for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
+
             if (tallies[diceValue - 1] >= 3)
                 return (diceValue) * 3;
         return 0;
@@ -144,9 +149,7 @@ public class Yatzy {
                 for (diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--) {
                     if (tallies[diceValue - 1] >= 3) {
 
-                        for (int dice : roll)
-                            total += dice;
-                        return total;
+                        return sumDiceValue();
                     }
                 }
             }
