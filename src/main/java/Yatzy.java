@@ -125,41 +125,33 @@ public class Yatzy {
 
     public int largeStraight() {
         int[] tallies = diceValueCounter(roll);
-
         if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
                 tallies[3] == 1 &&
-                tallies[4] == 1
-                && tallies[5] == 1)
+                tallies[4] == 1 &&
+                tallies[5] == 1)
             return 20;
         return 0;
     }
 
     public int fullHouse() {
-        boolean _2 = false;
-        int i;
-        int _2_at = 0;
-        boolean _3 = false;
-        int _3_at = 0;
-
+        int total = 0;
         int[] tallies = diceValueCounter(roll);
 
-        for (i = 0; i < TOTAL_DICE_FACES; i++)
-            if (tallies[i] == 2) {
-                _2 = true;
-                _2_at = i + 1;
-            }
+        for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--) {
+            if (tallies[diceValue - 1] >= 2) {
 
-        for (i = 0; i < TOTAL_DICE_FACES; i++)
-            if (tallies[i] == 3) {
-                _3 = true;
-                _3_at = i + 1;
-            }
+                for (diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--) {
+                    if (tallies[diceValue - 1] >= 3) {
 
-        if (_2 && _3)
-            return _2_at * 2 + _3_at * 3;
-        else
-            return 0;
+                        for (int dice : roll)
+                            total += dice;
+                        return total;
+                    }
+                }
+            }
+        }
+        return total;
     }
 
 }
