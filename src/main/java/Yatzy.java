@@ -141,27 +141,32 @@ public class Yatzy {
     }
 
     public int fullHouse() {
-        boolean isTwoOfAKind = false;
-        boolean isThreeOfAKind = false;
         int total = 0;
         int[] tallies = diceValueCounter(roll);
-
-        for (int i = 0; i < 6; i++) {
-            if (tallies[i] == 2) {
-                isTwoOfAKind = true;
-            }
+        if (isTwoOfAKind(tallies) && isThreeOfAKind(tallies)) {
+            total = sumDiceValue();
         }
+        return total;
+    }
+
+    private boolean isThreeOfAKind(int[] tallies) {
+        boolean isThreeOfAKind = false;
         for (int i = 0; i < 6; i++) {
             if (tallies[i] == 3) {
                 isThreeOfAKind = true;
             }
         }
-        if (isTwoOfAKind && isThreeOfAKind) {
-            for (int dice : roll)
-                total += dice;
-        }
-        return total;
+        return isThreeOfAKind;
+    }
 
+    private boolean isTwoOfAKind(int[] tallies) {
+        boolean isTwoOfAKind = false;
+        for (int i = 0; i < 6; i++) {
+            if (tallies[i] == 2) {
+                isTwoOfAKind = true;
+            }
+        }
+        return isTwoOfAKind;
     }
 
 }
