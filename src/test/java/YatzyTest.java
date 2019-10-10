@@ -24,7 +24,8 @@ public class YatzyTest {
     }
 
     @Test
-    public void twos_scores_sum_of_dice_value_twos() {
+    public void twos_scores_sum_of_dice_value_two
+            () {
         assertEquals(4, new Yatzy(1, 2, 1, 4, 2).twos());
         assertEquals(6, new Yatzy(2, 1, 2, 1, 2).twos());
     }
