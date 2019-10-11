@@ -1,8 +1,6 @@
 public class Yatzy {
 
     private static final int TOTAL_DICE_FACES = 6;
-    public static final int THREE_OCCURRENCE = 3;
-    public static final int TWO_OCCURRENCE = 2;
     public int[] roll;
 
     public Yatzy(int dice1, int dice2, int dice3, int dice4, int dice5) {
@@ -21,7 +19,7 @@ public class Yatzy {
         return total;
     }
 
-    public int[] occurrenceOfEachValueInARoll() {
+    public int[] occurenceOfEachValueInARoll() {
         int[] tallies = new int[TOTAL_DICE_FACES];
         for (int dice : roll)
             tallies[dice - 1]++;
@@ -39,8 +37,8 @@ public class Yatzy {
 
     public boolean isThreeOfAKind(int[] tallies) {
         boolean isThreeOfAKind = false;
-        for (int i = 0; i < TOTAL_DICE_FACES; i++) {
-            if (tallies[i] == THREE_OCCURRENCE) {
+        for (int i = 0; i < 6; i++) {
+            if (tallies[i] == 3) {
                 isThreeOfAKind = true;
             }
         }
@@ -49,8 +47,8 @@ public class Yatzy {
 
     public boolean isTwoOfAKind(int[] tallies) {
         boolean isTwoOfAKind = false;
-        for (int i = 0; i < TOTAL_DICE_FACES; i++) {
-            if (tallies[i] == TWO_OCCURRENCE) {
+        for (int i = 0; i < 6; i++) {
+            if (tallies[i] == 2) {
                 isTwoOfAKind = true;
             }
         }
