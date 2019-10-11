@@ -42,7 +42,7 @@ public class Score {
     }
 
     public int onePair(Yatzy yatzy) {
-        int[] tallies = yatzy.occurenceOfEachValueInARoll();
+        int[] tallies = yatzy.occurrenceOfEachValueInARoll();
         for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
             if (tallies[diceValue - 1] >= 2)
                 return (diceValue) * 2;
@@ -50,7 +50,7 @@ public class Score {
     }
 
     public int twoPair(Yatzy yatzy) {
-        int[] tallies = yatzy.occurenceOfEachValueInARoll();
+        int[] tallies = yatzy.occurrenceOfEachValueInARoll();
         int numberOfPair = 0;
         int score = 0;
         for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
@@ -65,7 +65,7 @@ public class Score {
     }
 
     public int threeOfAKind(Yatzy yatzy) {
-        int[] tallies = yatzy.occurenceOfEachValueInARoll();
+        int[] tallies = yatzy.occurrenceOfEachValueInARoll();
         for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
             if (tallies[diceValue - 1] >= 3)
                 return (diceValue) * 3;
@@ -73,7 +73,7 @@ public class Score {
     }
 
     public int fourOfAKind(Yatzy yatzy) {
-        int[] tallies = yatzy.occurenceOfEachValueInARoll();
+        int[] tallies = yatzy.occurrenceOfEachValueInARoll();
         for (int diceValue = TOTAL_DICE_FACES; diceValue >= 1; diceValue--)
             if (tallies[diceValue - 1] >= 4)
                 return (diceValue) * 4;
@@ -81,7 +81,7 @@ public class Score {
     }
 
     public int smallStraight(Yatzy yatzy) {
-        int[] tallies = yatzy.occurenceOfEachValueInARoll();
+        int[] tallies = yatzy.occurrenceOfEachValueInARoll();
         if (tallies[0] == 1 &&
                 tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -92,7 +92,7 @@ public class Score {
     }
 
     public int largeStraight(Yatzy yatzy) {
-        int[] tallies = yatzy.occurenceOfEachValueInARoll();
+        int[] tallies = yatzy.occurrenceOfEachValueInARoll();
         if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
                 tallies[3] == 1 &&
@@ -104,7 +104,7 @@ public class Score {
 
     public int fullHouse(Yatzy yatzy) {
         int total = 0;
-        int[] tallies = yatzy.occurenceOfEachValueInARoll();
+        int[] tallies = yatzy.occurrenceOfEachValueInARoll();
         if (yatzy.isTwoOfAKind(tallies) && yatzy.isThreeOfAKind(tallies)) {
             total = yatzy.sumDiceValueInARoll();
         }
