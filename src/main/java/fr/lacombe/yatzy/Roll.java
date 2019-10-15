@@ -5,34 +5,34 @@ public class Roll {
     private static final int TOTAL_DICE_FACES = 6;
     private static final int THREE_OCCURRENCE = 3;
     private static final int TWO_OCCURRENCE = 2;
-    public Dice[] roll;
+    public Dice[] game;
 
     public Roll(Dice dice1, Dice dice2, Dice dice3, Dice dice4, Dice dice5) {
-        roll = new Dice[5];
-        roll[0] = dice1;
-        roll[1] = dice2;
-        roll[2] = dice3;
-        roll[3] = dice4;
-        roll[4] = dice5;
+        game = new Dice[5];
+        game[0] = dice1;
+        game[1] = dice2;
+        game[2] = dice3;
+        game[3] = dice4;
+        game[4] = dice5;
     }
 
     public int sumDiceValue() {
         int total = 0;
-        for (Dice dice : roll)
+        for (Dice dice : game)
             total += dice.getValue();
         return total;
     }
 
     public int[] occurrenceOfEachValue() {
         int[] tallies = new int[TOTAL_DICE_FACES];
-        for (Dice dice : roll)
+        for (Dice dice : game)
             tallies[dice.getValue() - 1]++;
         return tallies;
     }
 
     public int sumDiceWithSameValue(int diceValue) {
         int total = 0;
-        for (Dice dice : roll)
+        for (Dice dice : game)
             if (dice.getValue() == diceValue)
                 total += diceValue;
         return total;
